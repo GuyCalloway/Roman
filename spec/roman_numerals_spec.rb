@@ -100,6 +100,18 @@ describe RomanNumerals do
   end
 
   it "returns 'DCDXCIX' when passed 999" do
-    expect(romanNumerals.translate(999)).to eq("DCDXCIX")
+    expect(romanNumerals.translate(999)).to eq("CMXCIX")
+  end
+
+  it "returns 'MMDLV' when passed 2555" do
+    expect(romanNumerals.translate(2555)).to eq("MMDLV")
+  end
+
+  it "returns '' when passed 0" do
+    expect(romanNumerals.translate(0)).to eq("")
+  end
+
+  it "returns '(V)M' when passed 6000" do
+    expect(romanNumerals.translate(6000)).to eq("(V)M")
   end
 end
