@@ -38,4 +38,68 @@ describe RomanNumerals do
   it "returns 'XI' when passed 11" do
     expect(romanNumerals.translate(11)).to eq("XI")
   end
+
+  it "returns 'XIV' when passed 14" do
+    expect(romanNumerals.translate(14)).to eq("XIV")
+  end
+
+  it "returns 'XXIV' when passed 24" do
+    expect(romanNumerals.translate(24)).to eq("XXIV")
+  end
+
+  it "returns 'L' when passed 50" do
+    expect(romanNumerals.translate(50)).to eq("L")
+  end
+
+  it "returns 'LVI' when passed 56" do
+    expect(romanNumerals.translate(56)).to eq("LVI")
+  end
+
+  it "returns 'LIV' when passed 54" do
+    expect(romanNumerals.translate(54)).to eq("LIV")
+  end
+
+  it "returns 'LIV' when passed 54" do
+    expect(romanNumerals.translate(54)).to eq("LIV")
+  end
+
+  it "returns 'XL' when passed 40" do
+    expect(romanNumerals.translate(144)).to eq("CXLIV")
+  end
+
+  it "returns 'C' when passed 100" do
+    expect(romanNumerals.translate(100)).to eq("C")
+  end
+
+  it "returns 'CC' when passed 200" do
+    expect(romanNumerals.translate(200)).to eq("CC")
+  end
+
+  it "returns 'XC' when passed 90" do
+    expect(romanNumerals.translate(90)).to eq("XC")
+  end
+
+  it "returns 'XCIX' when passed 9" do
+    expect(romanNumerals.translate(99)).to eq("XCIX")
+  end
+
+  it "returns 'CXCIX' when passed 199" do
+    expect(romanNumerals.translate(199)).to eq("CXCIX")
+  end
+
+  it "returns 'CCCXCIV' when passed 394" do
+    expect(romanNumerals.translate(394)).to eq("CCCXCIV")
+  end
+
+  it "returns 'CD' when passed 400" do
+    expect(romanNumerals.translate(400)).to eq("CD")
+  end
+
+  it "returns 'DCCCXCIV' when passed 894" do
+    expect(romanNumerals.translate(894)).to eq("DCCCXCIV")
+  end
+
+  it "returns 'DCDXCIX' when passed 999" do
+    expect(romanNumerals.translate(999)).to eq("DCDXCIX")
+  end
 end
