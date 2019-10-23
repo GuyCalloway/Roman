@@ -39,7 +39,7 @@ class RomanNumerals
 
     arr = ["M", "D", "C", "L", "X", "V", "I"]
     if mill
-      arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", "(I)"]
+      arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", "M"]
     end
 
     if index % 2 == 0

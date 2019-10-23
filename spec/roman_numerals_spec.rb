@@ -131,4 +131,12 @@ describe RomanNumerals do
     expect(romanNumerals.translate(90000)).to eq("(X)(C)")
   end
 
+  it "returns '(M)(C)(M)(X)(C)M(X)CMXCIX' when passed  1999999" do
+    expect(romanNumerals.translate(1999999)).to eq("(M)(C)(M)(X)(C)M(X)CMXCIX")
+  end
+
+  it "returns '(M)(M)(M)(C)(M)(X)(C)M(X)CMXCIX' when passed  3999999" do
+    expect(romanNumerals.translate(3999999)).to eq("(M)(M)(M)(C)(M)(X)(C)M(X)CMXCIX")
+  end
+
 end
