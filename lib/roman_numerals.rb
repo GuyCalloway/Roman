@@ -6,13 +6,18 @@ class RomanNumerals
   end
 
   def translate(integer)
+    hash =  {'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5}
+
     @integer = integer
+
+    hash.each{ |k, v| ((@integer / v)+1).times {chipper(v, k)}}
   
-    ((@integer / 500)+1).times {chipper(500, 'D')}
-    ((@integer / 100)+1).times {chipper(100, 'C')}
-    ((@integer / 50)+1).times {chipper(50, 'L')}
-    ((@integer / 10)+1).times {chipper(10, 'X')}
-    chipper(5, 'V')
+  
+    # ((@integer / 500)+1).times {chipper(500, 'D')}
+    # ((@integer / 100)+1).times {chipper(100, 'C')}
+    # ((@integer / 50)+1).times {chipper(50, 'L')}
+    # ((@integer / 10)+1).times {chipper(10, 'X')}
+    # chipper(5, 'V')
 
     @integer.times { @numeral << 'I' }
     @numeral
@@ -43,5 +48,5 @@ class RomanNumerals
   end
 end
 
-# {'M':1000, 'C':100, 'L':50, 'X':10, 'V':5}
+
 
