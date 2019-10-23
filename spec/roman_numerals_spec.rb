@@ -114,4 +114,21 @@ describe RomanNumerals do
   it "returns '(V)M' when passed 6000" do
     expect(romanNumerals.translate(6000)).to eq("(V)M")
   end
+
+  it "returns '(L)(X)(X)(V)DL' when passed 75550" do
+    expect(romanNumerals.translate(75550)).to eq("(L)(X)(X)(V)DL")
+  end
+
+  it "returns '(M)(D)(V)L' when passed 1505050" do
+    expect(romanNumerals.translate(1505050)).to eq("(M)(D)(V)L")
+  end
+
+  it "returns '(M)(D)(X)(C)(V)CDXCV' when passed  1595495" do
+    expect(romanNumerals.translate(1595495)).to eq("(M)(D)(X)(C)(V)CDXCV")
+  end
+
+  it "returns '(X)(C)' when passed  90000" do
+    expect(romanNumerals.translate(90000)).to eq("(X)(C)")
+  end
+
 end
