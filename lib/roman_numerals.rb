@@ -1,30 +1,36 @@
 
 class RomanNumerals
+
   def initialize
     @numeral = ''
     @integer = 0
     @integer1 = 0
+    @hash =  {'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5}
+    @hash2 = {'(M)' => 1000, '(D)' => 500, '(C)' => 100, '(L)' => 50, '(X)' => 10, '(V)' => 5}
   end
 
   def translate(integer)
-
     @integer = integer
 
-    hash =  {'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5}
-
     if @integer/1000 >= 4
-      @integer1 = @integer
-      @integer = (@integer/1000)
-      hash2 = {'(M)' => 1000, '(D)' => 500, '(C)' => 100, '(L)' => 50, '(X)' => 10, '(V)' => 5}
-      hash2.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, true, index)}}
-      @integer.times { @numeral << 'M' }
-      @integer = @integer1 - ((@integer1/1000)*1000)
+      above_4_thousand
     end
 
-    hash.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, false, index)}}
-    @integer.times { @numeral << 'I' }
-
+    below_thousand
     @numeral
+  end
+
+  def below_thousand
+    @hash.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, false, index)}}
+    @integer.times { @numeral << 'I' }
+  end
+
+  def above_4_thousand
+      @integer1 = @integer
+      @integer = (@integer/1000)
+      @hash2.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, true, index)}}
+      @integer.times { @numeral << 'M' }
+      @integer = @integer1 - ((@integer1/1000)*1000)
   end
 
   def chipper(numeral_value, numeral, mil, index)
@@ -36,11 +42,7 @@ class RomanNumerals
   end
 
   def pre(index, numeral_value, numeral, mill)
-
-    arr = ["M", "D", "C", "L", "X", "V", "I"]
-    if mill
-      arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", "M"]
-    end
+    arr = array(mill)
 
     if index % 2 == 0
       nom = numeral_value/10
@@ -57,6 +59,13 @@ class RomanNumerals
     end
   end
 
+  def array(mill)
+    if mill
+      arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", "M"]
+    else
+      arr = ["M", "D", "C", "L", "X", "V", "I"]
+    end
+  end
 end
 
 
