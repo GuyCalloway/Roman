@@ -1,12 +1,12 @@
   def translate(integer)
-    numerals = []
+    numerals = ""
     calculator(integer, numerals)
-    numerals.join("")
   end
 
   def calculator(integer, numerals)
     hash =  {'(M)' => 1000000, '(D)' => 500000, '(C)' => 100000, '(L)' => 50000, '(X)' => 10000, '(V)' => 5000, 'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5, "I" => 1}
     hash.each_with_index { |(numeral, value), index| ((integer / value)+1).times {integer = chipper(integer, value, numeral, index, numerals)}}
+    return numerals
   end
 
   def chipper(integer, numeral_value, numeral, index, numerals)
