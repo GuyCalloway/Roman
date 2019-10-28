@@ -1,72 +1,40 @@
-
-class RomanNumerals
-
-  def initialize
-    @numeral = ''
-    @integer = 0
-    @integer1 = 0
-    @hash =  {'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5}
-    @hash2 = {'(M)' => 1000, '(D)' => 500, '(C)' => 100, '(L)' => 50, '(X)' => 10, '(V)' => 5}
-  end
-
   def translate(integer)
-    @integer = integer
+    numerals = []
+    calculator(integer, numerals)
+    numerals.join("")
+  end
 
-    if @integer/1000 >= 4
-      above_4_thousand
+  def calculator(integer, numerals)
+    hash =  {'(M)' => 1000000, '(D)' => 500000, '(C)' => 100000, '(L)' => 50000, '(X)' => 10000, '(V)' => 5000, 'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5, "I" => 1}
+    hash.each_with_index { |(numeral, value), index| ((integer / value)+1).times {integer = chipper(integer, value, numeral, index, numerals)}}
+  end
+
+  def chipper(integer, numeral_value, numeral, index, numerals)
+    integer = pre(integer, index, numeral_value, numeral, numerals)
+    if integer >= numeral_value
+          numerals << numeral
+          integer -= numeral_value
     end
-
-    below_thousand
-    @numeral
+    return integer
   end
 
-  def below_thousand
-    @hash.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, false, index)}}
-    @integer.times { @numeral << 'I' }
-  end
-
-  def above_4_thousand
-      @integer1 = @integer
-      @integer = (@integer/1000)
-      @hash2.each_with_index { |(numeral, value), index| ((@integer / value)+1).times {chipper(value, numeral, true, index)}}
-      @integer.times { @numeral << 'M' }
-      @integer = @integer1 - ((@integer1/1000)*1000)
-  end
-
-  def chipper(numeral_value, numeral, mil, index)
-    pre(index, numeral_value, numeral, mil)
-    if @integer >= numeral_value
-          @numeral << numeral
-          @integer -= numeral_value
-    end
-  end
-
-  def pre(index, numeral_value, numeral, mill)
-    arr = array(mill)
-
+  def pre(integer, index, numeral_value, numeral, numerals)
     if index % 2 == 0
-      nom = numeral_value/10
-      if (@integer/nom == (numeral_value/nom - 1)) && (@integer > nom)
-        @numeral << arr[index + 2] + numeral
-        @integer -= (numeral_value - nom)
-      end
+      numeral_value == 1 ? nom = numeral_value : nom = numeral_value/10
+      integer = four9(2, nom, integer, index, numeral_value, numeral, numerals )
     else
       nom = numeral_value/5
-      if (@integer/nom == (numeral_value/nom - 1)) && (@integer > nom)
-        @numeral << arr[index + 1] + numeral
-        @integer -= (numeral_value - nom)
-      end
+      integer = four9(1, nom, integer, index, numeral_value, numeral, numerals )
     end
+    return integer
   end
 
-  def array(mill)
-    if mill
-      arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", "M"]
-    else
-      arr = ["M", "D", "C", "L", "X", "V", "I"]
+  def four9(x, nom, integer, index, numeral_value, numeral, numerals )
+    arr = ["(M)", "(D)", "(C)", "(L)", "(X)", "(V)", 'M' , 'D', "C", "L", "X", "V", "I", "I", "I"]
+    if (integer/nom == (numeral_value/nom - 1)) && (integer > nom)
+      numerals << arr[index + x] + numeral
+      integer -= (numeral_value - nom)
     end
+      return integer
   end
-end
-
-
-
+# all functions shud be input out put and return something ** state cannot change
